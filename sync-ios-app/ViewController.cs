@@ -2,7 +2,7 @@ using System;
 
 using UIKit;
 
-namespace sync_xamarin_app
+namespace sync.model
 {
     public partial class ViewController : UIViewController
     {

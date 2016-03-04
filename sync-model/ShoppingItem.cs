@@ -2,7 +2,7 @@
 using FHSDK.Sync;
 using Newtonsoft.Json;
 
-namespace sync_xamarin_app
+namespace sync.model
 {
 	public class ShoppingItem: IFHSyncModel
 	{

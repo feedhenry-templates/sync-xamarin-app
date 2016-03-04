@@ -2,7 +2,7 @@
 using UIKit;
 using FHSDK.Sync;
 
-namespace sync_xamarin_app
+namespace sync.model
 {
 	public partial class DetailsViewController: UIViewController
 	{

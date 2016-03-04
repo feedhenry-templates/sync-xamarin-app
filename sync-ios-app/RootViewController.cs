@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using FHSDK;
 using FHSDK.Sync;
 
-namespace sync_xamarin_app
+namespace sync.model
 {
 	public partial class RootViewController : UITableViewController
 	{

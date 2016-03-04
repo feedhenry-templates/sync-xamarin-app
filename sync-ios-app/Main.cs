@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace sync_xamarin_app
+namespace sync.model
 {
     public class Application
     {

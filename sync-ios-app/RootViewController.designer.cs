@@ -9,7 +9,7 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace sync_xamarin_app
+namespace sync.model
 {
 	[Register ("RootViewController")]
 	partial class RootViewController

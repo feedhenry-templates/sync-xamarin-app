@@ -102,7 +102,6 @@
       <DependentUpon>RootViewController.cs</DependentUpon>
     </Compile>
     <None Include="packages.config" />
-    <Compile Include="ShoppingItem.cs" />
     <Compile Include="DetailsViewController.cs" />
     <Compile Include="DetailsViewController.designer.cs">
       <DependentUpon>DetailsViewController.cs</DependentUpon>
@@ -129,6 +128,7 @@
       <HintPath>..\packages\FH.SDK.1.3.6\lib\xamarinios10\FHXamarinIOSSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <Import Project="..\sync-model\sync-model.projitems" Label="Shared" Condition="Exists('..\sync-model\sync-model.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <BundleResource Include="fhconfig.plist" />
