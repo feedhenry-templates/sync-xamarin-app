@@ -11,8 +11,8 @@ using UIKit;
 
 namespace sync_xamarin_app
 {
-	[Register ("ViewController")]
-	partial class ViewController
+	[Register ("RootViewController")]
+	partial class RootViewController
 	{
 		void ReleaseDesignerOutlets ()
 		{

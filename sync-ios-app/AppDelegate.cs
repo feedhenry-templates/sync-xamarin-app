@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using UIKit;
+using System.Threading.Tasks;
 
 namespace sync_xamarin_app
 {
@@ -18,15 +19,6 @@ namespace sync_xamarin_app
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // create a new window instance based on the screen size
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            // If you have defined a root view controller, set it here:
-            // Window.RootViewController = myViewController;
-
-            // make the window visible
-            Window.MakeKeyAndVisible();
-
             return true;
         }
 
