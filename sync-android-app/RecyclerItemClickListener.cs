@@ -8,12 +8,11 @@ namespace syncandroidapp
 {
 	public class RecyclerItemClickListener: Java.Lang.Object, RecyclerView.IOnItemTouchListener
 	{
-		private IOnItemClickListener _listener;
 		private GestureDetectorCompat _getstureDetector;
+		public event EventHandler<ItemClickEvent> ItemClickEvent;
 
-		public RecyclerItemClickListener (Context context, IOnItemClickListener listener)
+		public RecyclerItemClickListener (Context context)
 		{
-			_listener = listener;
 			_getstureDetector = new GestureDetectorCompat (context, new SingleTap ());
 		}
 
@@ -22,7 +21,8 @@ namespace syncandroidapp
 			var childView = view.FindChildViewUnder (e.GetX (), e.GetY ());
 			if (childView != null && _getstureDetector.OnTouchEvent (e)) 
 			{
-				_listener.OnItemClick (childView, view.GetChildPosition (childView));
+				EventHandler<ItemClickEvent> handler = ItemClickEvent;
+				handler(this, new ItemClickEvent(childView, view.GetChildPosition (childView)));
 			}
 			return false;
 		}
@@ -44,8 +44,14 @@ namespace syncandroidapp
 		}
 	}
 
-	public interface IOnItemClickListener {
-		void OnItemClick(View view, int position);
+	public class ItemClickEvent: EventArgs {
+		public View View { get; private set; }
+		public int Position { get; private set; }
+		public ItemClickEvent(View view, int position) 
+		{
+			View = view;
+			Position = position;
+		}
 	}
 }
 

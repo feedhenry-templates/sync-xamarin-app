@@ -78,6 +78,7 @@
     <Compile Include="ListOfItemsActivity.cs" />
     <Compile Include="ShoppingItemAdapter.cs" />
     <Compile Include="RecyclerItemClickListener.cs" />
+    <Compile Include="SwipeTouchHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

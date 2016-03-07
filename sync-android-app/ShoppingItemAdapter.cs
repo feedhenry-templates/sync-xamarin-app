@@ -59,7 +59,7 @@ namespace syncandroidapp
 
 		private ShoppingItem _item;
 
-		public ShoppingItem Item { protected 
+		public ShoppingItem Item { 
 			get 
 			{ return _item;
 			}

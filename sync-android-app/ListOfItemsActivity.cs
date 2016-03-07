@@ -14,11 +14,13 @@ using Android.Support.V7.Widget;
 using Android.Support.V7.App;
 using sync.model;
 using FHSDK.Sync;
+using Android.Support.Design.Widget;
+using Android.Support.V7.Widget.Helper;
 
 namespace syncandroidapp
 {
 	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]
-	public class ListOfItemsActivity : AppCompatActivity, IOnItemClickListener
+	public class ListOfItemsActivity : AppCompatActivity
 	{
 		private const string DatasetId = "myShoppingList";
 
@@ -37,7 +39,24 @@ namespace syncandroidapp
 			_list = (RecyclerView)FindViewById (Resource.Id.list);
 			_list.SetLayoutManager (new LinearLayoutManager (this));
 			_list.SetAdapter (_adapter);
-			_list.AddOnItemTouchListener (new RecyclerItemClickListener(ApplicationContext, this));
+			var recyclerItemClick = new RecyclerItemClickListener (ApplicationContext);
+			_list.AddOnItemTouchListener (recyclerItemClick);
+			recyclerItemClick.ItemClickEvent += (object sender, ItemClickEvent e) => {
+				ShowPopup (_adapter.GetItem (e.Position));
+			};
+
+			var callback = new SwipeTouchHelper ();
+			callback.ItemSwipeEvent += (object sender, ItemSwipeEvent e) => {
+				DeleteItem(e.Item);
+			};
+
+			var touchHelper = new ItemTouchHelper (callback);
+			touchHelper.AttachToRecyclerView (_list);
+
+			var fab = (FloatingActionButton)FindViewById (Resource.Id.fab);
+			fab.Click += delegate {
+				ShowPopup(new ShoppingItem(""));
+			};
 		}
 
 		protected override void OnStart() {
@@ -60,11 +79,6 @@ namespace syncandroidapp
 			client.Manage<ShoppingItem>(DatasetId, config, null);
 		}
 
-		public void OnItemClick(View view, int position)
-		{
-			ShowPopup (_adapter.GetItem(position));
-		}
-
 		private void ShowPopup(ShoppingItem item) 
 		{
 			var customView = View.Inflate (ApplicationContext, Resource.Layout.form_item_dialog, null);
@@ -72,8 +86,29 @@ namespace syncandroidapp
 			name.Text = item.Name;
 
 			new Android.Support.V7.App.AlertDialog.Builder (this)
-				.SetView (customView).Show (); 
+				.SetTitle(item.UID == null ? GetString(Resource.String.new_item) :
+					GetString(Resource.String.edit_item) + ": " + item.Name)
+				.SetPositiveButton(GetText(Resource.String.save), delegate {
+					item.Name = name.Text;
+					SaveItem(item);
+				})
+				.SetView (customView).Show ();
 
+		}
+
+		private void SaveItem(ShoppingItem item) 
+		{
+			var client = FHSyncClient.GetInstance();
+			if (item.UID == null) {
+				client.Create (DatasetId, item);
+			} else {
+				client.Update (DatasetId, item);
+			}
+		}
+
+		private void DeleteItem(ShoppingItem item) 
+		{
+			FHSyncClient.GetInstance ().Delete<ShoppingItem> (DatasetId, item.UID);
 		}
 	}
 }
