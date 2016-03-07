@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
 
+using System;
 using UIKit;
 
-namespace sync.model
+namespace sync_xamarin_app
 {
     public partial class ViewController : UIViewController
     {
-		public ViewController (IntPtr handle) : base (handle)
-		{
-		}
-
-
+        public ViewController(IntPtr handle) : base(handle)
+        {
+        }
     }
 }

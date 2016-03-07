@@ -13,84 +13,89 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
 
-using UIKit;
-using Foundation;
+using System;
 using System.Collections.Generic;
 using FHSDK;
 using FHSDK.Sync;
+using Foundation;
+using sync.model;
+using UIKit;
 
-namespace sync.model
+namespace sync_xamarin_app
 {
-	public partial class RootViewController : UITableViewController
-	{
-		public const string DatasetId = "myShoppingList";
-		private List<ShoppingItem> _items = new List<ShoppingItem>();
-		public RootViewController (IntPtr handle) : base (handle)
-		{
-		}
+    public partial class RootViewController : UITableViewController
+    {
+        public const string DatasetId = "myShoppingList";
+        private List<ShoppingItem> _items = new List<ShoppingItem>();
 
-		public async override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-			EditButtonItem.Enabled = false;
+        public RootViewController(IntPtr handle) : base(handle)
+        {
+        }
 
-			await FHClient.Init ();
-			var client = FHSyncClient.GetInstance();
-			var config = new FHSyncConfig();
-			client.Initialise(config);
-			client.SyncCompleted += async (sender, args) =>
-			{
-				UIApplication.SharedApplication.InvokeOnMainThread(delegate {
-					_items = client.List<ShoppingItem>(DatasetId);
-					TableView.ReloadData();
-				});
-			};
-			client.Manage<ShoppingItem>(DatasetId, config, null);
-		}
+        public override async void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            EditButtonItem.Enabled = false;
 
-		public override nint NumberOfSections (UITableView tableView)
-		{
-			return 1;
-		}
+            await FHClient.Init();
+            var client = FHSyncClient.GetInstance();
+            var config = new FHSyncConfig();
+            client.Initialise(config);
+            client.SyncCompleted += (sender, args) =>
+            {
+                UIApplication.SharedApplication.InvokeOnMainThread(delegate
+                {
+                    _items = client.List<ShoppingItem>(DatasetId);
+                    TableView.ReloadData();
+                });
+            };
+            client.Manage<ShoppingItem>(DatasetId, config, null);
+        }
 
-		public override nint RowsInSection (UITableView tableview, nint section)
-		{
-			return _items.Count;
-		}
+        public override nint NumberOfSections(UITableView tableView)
+        {
+            return 1;
+        }
 
-		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
-		{
-			var item = _items [indexPath.Row];
-			var cell = tableView.DequeueReusableCell ("Cell");
-			cell.TextLabel.Text = item.Name;
-			cell.DetailTextLabel.Text = item.GetCreatedTime();
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return _items.Count;
+        }
 
-			return cell;
-		}
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+        {
+            var item = _items[indexPath.Row];
+            var cell = tableView.DequeueReusableCell("Cell");
+            cell.TextLabel.Text = item.Name;
+            cell.DetailTextLabel.Text = item.GetCreatedTime();
 
-		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
-		{
-			var dest = segue.DestinationViewController as DetailsViewController;
-			if (segue.Identifier.Equals("showExistingItemDetails")) {
-				var item = _items [TableView.IndexPathForCell ((UITableViewCell)sender).Row];
-				dest.Item = item;
+            return cell;
+        }
 
-			} else if (segue.Identifier == "showNewItemDetails") {
-				dest.Item = null;
-			}
-		}
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            var dest = segue.DestinationViewController as DetailsViewController;
+            if (segue.Identifier.Equals("showExistingItemDetails"))
+            {
+                var item = _items[TableView.IndexPathForCell((UITableViewCell) sender).Row];
+                dest.Item = item;
+            }
+            else if (segue.Identifier == "showNewItemDetails")
+            {
+                dest.Item = null;
+            }
+        }
 
-		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
-		{
-			if (editingStyle == UITableViewCellEditingStyle.Delete) {
-				FHSyncClient.GetInstance().Delete<ShoppingItem>(DatasetId, _items[indexPath.Row].UID);
-				_items.RemoveAt (indexPath.Row);
-				tableView.ReloadData ();
-			}
-		}
-	}
+        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle,
+            NSIndexPath indexPath)
+        {
+            if (editingStyle == UITableViewCellEditingStyle.Delete)
+            {
+                FHSyncClient.GetInstance().Delete<ShoppingItem>(DatasetId, _items[indexPath.Row].UID);
+                _items.RemoveAt(indexPath.Row);
+                tableView.ReloadData();
+            }
+        }
+    }
 }
-
-

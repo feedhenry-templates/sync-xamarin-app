@@ -4,12 +4,10 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using Foundation;
-using System;
-using System.CodeDom.Compiler;
-using UIKit;
 
-namespace sync.model
+using Foundation;
+
+namespace sync_xamarin_app
 {
 	[Register ("RootViewController")]
 	partial class RootViewController

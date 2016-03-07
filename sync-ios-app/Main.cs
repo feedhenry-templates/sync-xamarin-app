@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using UIKit;
 
-namespace sync.model
+namespace sync_xamarin_app
 {
     public class Application
     {
         // This is the main entry point of the application.
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
