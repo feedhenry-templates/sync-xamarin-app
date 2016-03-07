@@ -23,10 +23,10 @@ namespace sync.model
 
 		public override string ToString()
 		{
-			return string.Format("[ShoppingItem: UID={0}, Name={1}, Created={2}]", UID, Name, Created);
+			return $"[ShoppingItem: UID={UID}, Name={Name}, Created={Created}]";
 		}
 
-		private DateTime GetEpoch() 
+		private static DateTime GetEpoch() 
 		{
 			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -50,7 +50,7 @@ namespace sync.model
 
 		public override int GetHashCode()
 		{
-			return (UID != null ? UID.GetHashCode() : 0);
+			return UID?.GetHashCode() ?? 0;
 		}
 	}
 }

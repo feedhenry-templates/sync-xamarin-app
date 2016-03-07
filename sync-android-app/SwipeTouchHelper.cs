@@ -1,51 +1,40 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.Content.PM;
 using Android.Support.V7.Widget;
-using Android.Support.V7.App;
-using sync.model;
-using FHSDK.Sync;
 using Android.Support.V7.Widget.Helper;
+using sync.model;
 
 namespace syncandroidapp
 {
-	public class SwipeTouchHelper: ItemTouchHelper.SimpleCallback
-	{
-		public event EventHandler<ItemSwipeEvent> ItemSwipeEvent;
+    public class SwipeTouchHelper : ItemTouchHelper.SimpleCallback
+    {
+        public SwipeTouchHelper() : base(0, ItemTouchHelper.Right)
+        {
+        }
 
-		public SwipeTouchHelper() : base(0, ItemTouchHelper.Right) {}
+        public event EventHandler<ItemSwipeEvent> ItemSwipeEvent;
 
-		public override bool OnMove (RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-		{
-			return false;
-		}
+        public override bool OnMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+            RecyclerView.ViewHolder target)
+        {
+            return false;
+        }
 
-		public override void OnSwiped (RecyclerView.ViewHolder viewHolder, int direction)
-		{
-			var v = (ShoppingItemViewHolder)viewHolder;
-			EventHandler<ItemSwipeEvent> handler = ItemSwipeEvent;
+        public override void OnSwiped(RecyclerView.ViewHolder viewHolder, int direction)
+        {
+            var v = (ShoppingItemViewHolder) viewHolder;
+            var handler = ItemSwipeEvent;
 
-			handler(this, new ItemSwipeEvent(v.Item));
-		}
-	}
+            handler?.Invoke(this, new ItemSwipeEvent(v.Item));
+        }
+    }
 
-	public class ItemSwipeEvent: EventArgs 
-	{
-		public ShoppingItem Item { get; private set; }
+    public class ItemSwipeEvent : EventArgs
+    {
+        public ItemSwipeEvent(ShoppingItem item)
+        {
+            Item = item;
+        }
 
-		public ItemSwipeEvent (ShoppingItem item) {
-			Item = item;
-		}
-	}
-
+        public ShoppingItem Item { get; private set; }
+    }
 }
-
