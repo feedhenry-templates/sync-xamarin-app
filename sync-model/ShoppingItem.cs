@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright Red Hat, Inc, and individual contributors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
 using System;
 using FHSDK.Sync;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace sync.model
 {
@@ -24,14 +25,14 @@ namespace sync.model
 		public ShoppingItem(string name)
 		{
 			Name = name;
-			Created = (long) (DateTime.Now - GetEpoch()).TotalMilliseconds;
+			Created = "" + (DateTime.Now - GetEpoch()).TotalMilliseconds;
 		}
 
 		[JsonProperty("name")]
 		public string Name { set; get; }
 
 		[JsonProperty("created")]
-		public long Created { set; get; }
+		public string Created { set; get; }
 
 		[JsonIgnore]
 		public string UID { set; get; }
@@ -48,7 +49,10 @@ namespace sync.model
 		}
 
 		public string GetCreatedTime() {
-			return GetEpoch().AddMilliseconds(Created).ToString ("MMM dd, yyyy, H:mm:ss tt");
+			if (Regex.IsMatch (Created, @"^\d*$")) {
+				return GetEpoch().AddMilliseconds(double.Parse(Created)).ToString ("MMM dd, yyyy, H:mm:ss tt");
+			}
+			return "no date";
 		}
 
 		private bool Equals(IFHSyncModel other)
