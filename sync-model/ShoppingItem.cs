@@ -25,7 +25,7 @@ namespace sync.model
 		public ShoppingItem(string name)
 		{
 			Name = name;
-			Created = "" + (DateTime.Now - GetEpoch()).TotalMilliseconds;
+			Created = "" + ((long)(DateTime.Now - GetEpoch()).TotalMilliseconds);
 		}
 
 		[JsonProperty("name")]
@@ -50,7 +50,7 @@ namespace sync.model
 
 		public string GetCreatedTime() {
 			if (Regex.IsMatch (Created, @"^\d*$")) {
-				return GetEpoch().AddMilliseconds(double.Parse(Created)).ToString ("MMM dd, yyyy, H:mm:ss tt");
+				return GetEpoch().AddMilliseconds(long.Parse(Created)).ToString ("MMM dd, yyyy, H:mm:ss tt");
 			}
 			return "no date";
 		}
@@ -73,4 +73,3 @@ namespace sync.model
 		}
 	}
 }
-
