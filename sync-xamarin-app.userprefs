@@ -1,0 +1,9 @@
+﻿<Properties StartupItem="sync-ios-app/sync-ios-app.csproj" RefactoringSettings.EnableRefactorings="True">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6s.9.3" />
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.sync-android-app AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>
