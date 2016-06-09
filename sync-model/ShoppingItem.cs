@@ -22,6 +22,7 @@ namespace sync.model
 {
 	public class ShoppingItem: IFHSyncModel
 	{
+		public ShoppingItem() {}
 		public ShoppingItem(string name)
 		{
 			Name = name;
@@ -49,7 +50,7 @@ namespace sync.model
 		}
 
 		public string GetCreatedTime() {
-			if (Regex.IsMatch (Created, @"^\d*$")) {
+			if (Created != null && Regex.IsMatch (Created, @"^\d+?$")) {
 				return GetEpoch().AddMilliseconds(long.Parse(Created)).ToString ("MMM dd, yyyy, H:mm:ss tt");
 			}
 			return "no date";
