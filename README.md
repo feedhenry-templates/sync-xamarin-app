@@ -46,10 +46,10 @@ In ```sync-ios-app/RootController.cs``` and ```sync-android-app/ListOfItemsActiv
   client.Initialise(config);   // [1]
   client.SyncCompleted += (sender, args) =>
   {
-	UIApplication.SharedApplication.InvokeOnMainThread(delegate {
-		_items = client.List<ShoppingItem>(DatasetId);
-		TableView.ReloadData();
-	});
+  UIApplication.SharedApplication.InvokeOnMainThread(delegate {
+    _items = client.List<ShoppingItem>(DatasetId);
+    TableView.ReloadData();
+  });
   };
 ```
 [1] Initialize with sync configuration.
