@@ -1,5 +1,7 @@
 # sync-xamarin-app
 
+[![AppVeyor](https://img.shields.io/appveyor/ci/feedhenry-templates/sync-xamarin-app/master.svg)](https://ci.appveyor.com/project/feedhenry/sync-xamarin-app/)
+
 Author: Erik Jan de Wit   
 Level: Intermediate  
 Technologies: C#, Windows, RHMAP
