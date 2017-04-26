@@ -20,20 +20,21 @@ using System.Text.RegularExpressions;
 
 namespace sync.model
 {
-	public class ShoppingItem: IFHSyncModel
+	public class ShoppingItem : IFHSyncModel
 	{
-		public ShoppingItem() {}
+		public ShoppingItem() { }
 		public ShoppingItem(string name)
 		{
 			Name = name;
-			Created = "" + ((long)(DateTime.Now - GetEpoch()).TotalMilliseconds);
+			Created = DateTime.Now;
 		}
 
 		[JsonProperty("name")]
 		public string Name { set; get; }
 
 		[JsonProperty("created")]
-		public string Created { set; get; }
+        [JsonConverter(typeof(MillisecondEpochConverter))]
+		public DateTime Created { set; get; }
 
 		[JsonIgnore]
 		public string UID { set; get; }
@@ -41,19 +42,6 @@ namespace sync.model
 		public override string ToString()
 		{
 			return $"[ShoppingItem: UID={UID}, Name={Name}, Created={Created}]";
-		}
-
-		private static DateTime GetEpoch() 
-		{
-			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-		}
-
-		public string GetCreatedTime() {
-			if (Created != null && Regex.IsMatch (Created, @"^\d+?$")) {
-				return GetEpoch().AddMilliseconds(long.Parse(Created)).ToString ("MMM dd, yyyy, H:mm:ss tt");
-			}
-			return "no date";
 		}
 
 		private bool Equals(IFHSyncModel other)
@@ -65,12 +53,33 @@ namespace sync.model
 		{
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
-			return obj.GetType() == GetType() && Equals((ShoppingItem) obj);
+			return obj.GetType() == GetType() && Equals((ShoppingItem)obj);
 		}
 
 		public override int GetHashCode()
 		{
 			return UID?.GetHashCode() ?? 0;
+		}
+
+		public string GetCreatedTime()
+		{
+			return Created.ToString("MMM dd, yyyy, H:mm:ss tt");
+		}
+
+		public class MillisecondEpochConverter : Newtonsoft.Json.Converters.DateTimeConverterBase
+		{
+			private static readonly DateTime _epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+			public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+			{
+				writer.WriteRawValue(Convert.ToInt64(((DateTime)value - _epoch).TotalMilliseconds).ToString());
+			}
+
+			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+			{
+				if (reader.Value == null) { return null; }
+				return _epoch.AddMilliseconds(Int64.Parse(reader.Value.ToString()));
+			}
 		}
 	}
 }
