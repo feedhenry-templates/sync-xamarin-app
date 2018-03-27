@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <licenseSummary>
-    <project>saml-android-app</project>
+    <project>sync-xamarin-app</project>
     <version>0.0.0</version>
     <license>Apache-2.0</license>
     <dependencies>
