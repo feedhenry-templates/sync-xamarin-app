@@ -1,0 +1,148 @@
+<?xml version='1.0'?>
+<licenseSummary>
+    <project>saml-android-app</project>
+    <version>0.0.0</version>
+    <license>Apache-2.0</license>
+    <dependencies>
+    <dependency>
+            <packageName>aerogear-windows-push</packageName>
+            <version>0.1.0</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+         <dependency>
+            <packageName>CommonServiceLocator</packageName>
+            <version>1.3.0</version>
+            <licenses>
+                <license>
+                    <name>Microsoft Public License</name>
+                    <url>https://opensource.org/licenses/MS-PL</url>
+                </license>
+            </licenses>
+        </dependency>
+         <dependency>
+            <packageName>FH.SDK</packageName>
+            <version>1.3.7.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+         <dependency>
+            <packageName>Newtonsoft.Json</packageName>
+            <version>8.0.3</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+         <dependency>
+            <packageName>Unity</packageName>
+            <version>4.0.1</version>
+            <licenses>
+                <license>
+                    <name>UNKNOWN</name>
+                    <url>UNKNOWN</url>
+                </license>
+            </licenses>
+        </dependency>
+         <dependency>
+            <packageName>Xamarin.Android.Support.Design</packageName>
+            <version>23.1.1.0</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.Android.Support.v4</packageName>
+            <version>23.1.1.0</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.Android.Support.v4</packageName>
+            <version>23.3.0</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.Android.Support.v7.AppCompat</packageName>
+            <version>23.1.1.0</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+         <dependency>
+            <packageName>Xamarin.Android.Support.v7.RecyclerView</packageName>
+            <version>23.1.1.0</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.GooglePlayServices.Base</packageName>
+            <version>29.0.0.2</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.GooglePlayServices.Basement</packageName>
+            <version>29.0.0.2</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.GooglePlayServices.Gcm</packageName>
+            <version>29.0.0.2</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <packageName>Xamarin.GooglePlayServices.Measurement</packageName>
+            <version>29.0.0.2</version>
+            <licenses>
+                <license>
+                    <name>MIT License</name>
+                    <url>http://www.opensource.org/licenses/MIT</url>
+                </license>
+            </licenses>
+        </dependency>
+    </dependencies>
+</licenseSummary>
